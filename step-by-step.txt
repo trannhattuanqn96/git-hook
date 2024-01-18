@@ -3,7 +3,7 @@
 - git config (local)
     vi ~/.ssh/config
 
-    Host ubuntu@ec2-54-165-234-136.compute-1.amazonaws.com
+    Host ec2-54-165-234-136.compute-1.amazonaws.com
     User ubuntu
     IdentityFile /d/tuan.pem
     IdentitiesOnly yes
@@ -49,8 +49,6 @@ while read oldrev newrev ref; do
     BRANCH=$(git rev-parse --symbolic --abbrev-ref $ref)
     if [ $BRANCH == "master" ]; then
             TARGET="/home/ubuntu/git-hook"
-    elif [ $BRANCH == "staging" ]; then
-            TARGET="/var/www/myproject-staging"
     else
             echo "Branch not found. Skipping Deployment."
     fi
