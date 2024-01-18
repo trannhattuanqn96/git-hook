@@ -35,3 +35,4 @@ done
 - chmod +x post-receive
 
 git --work-tree=$TARGET pull
+git --work-tree=$TARGET --git-dir=$GIT_DIR pull $BRANCH
