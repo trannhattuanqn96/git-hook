@@ -68,8 +68,8 @@ while read oldrev newrev ref; do
             cd "$TARGET"
             # run script
             npm install express
-            npm install -g nodemon
-            npm i
+            sudo npm install -g nodemon
+            npm update
             nodemon index.js
     fi
 done
