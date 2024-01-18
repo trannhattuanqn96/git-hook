@@ -1,9 +1,9 @@
 const express = require('express')
 const app = express()
-const port = 1359
+const port = 1360
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('đã vào trang dev')
 })
 
 app.listen(port, () => {
