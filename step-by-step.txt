@@ -62,6 +62,14 @@ while read oldrev newrev ref; do
             echo "Push to ${BRANCH} received! Deploying branch: ${BRANCH} to: ${TARGET}"
             # deploy to our target directory.
             git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f $BRANCH
+
+
+            # run script
+            cd "$TARGET"
+            # run script
+            npm install express
+            sudo npm install -g nodemon
+            npm update
     fi
 done
 
@@ -70,3 +78,7 @@ done
 
 - Tạo thư mục source (git-hook)
    mkdir git-hook
+
+- tìm port đã sử dụng 
+lsof -i :1360
+kill <PID>
