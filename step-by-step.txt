@@ -70,7 +70,6 @@ while read oldrev newrev ref; do
             npm install express
             sudo npm install -g nodemon
             npm update
-            nodemon index.js
     fi
 done
 
