@@ -69,7 +69,7 @@ while read oldrev newrev ref; do
             # run script
             npm install express
             npm install -g nodemon
-            npm update
+            npm i
             nodemon index.js
     fi
 done
