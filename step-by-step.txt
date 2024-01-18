@@ -79,3 +79,7 @@ done
 
 - Tạo thư mục source (git-hook)
    mkdir git-hook
+
+- tìm port đã sử dụng 
+lsof -i :1360
+kill <PID>
