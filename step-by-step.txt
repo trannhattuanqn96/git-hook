@@ -1,5 +1,6 @@
 //https://medium.com/@rishpandey/simplest-auto-deployment-using-git-hooks-4cd6d98e0fc6
-- clone project
+
+- clone project (into local)
 
 - cd <project>/.git/hooks
 
