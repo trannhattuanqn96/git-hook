@@ -1,0 +1,4 @@
+Host ec2-44-201-251-200.compute-1.amazonaws.com
+  User ubuntu
+  IdentityFile /d/quy3.pem
+  IdentitiesOnly yes
