@@ -25,7 +25,7 @@
     # add remote origin github
     git remote add origin git@github.com:myaccount/myproject.git
     # add remote origin vps
-    git remote set-url --add --push origin ubuntu@ubuntu@ec2-54-165-234-136.compute-1.amazonaws.com:/home/ubuntu/myproject-git
+    git remote set-url --add --push origin ubuntu@ec2-54-165-234-136.compute-1.amazonaws.com:/home/ubuntu/myproject-git
     # kiểm tra lại 
     git remote -v (lúc này tại "# add remote origin vps" ghi đè lên lại github )
     # add remote origin github
