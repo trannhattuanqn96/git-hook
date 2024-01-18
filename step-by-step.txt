@@ -14,7 +14,7 @@ do
     if [[ $refname == "refs/heads/master" ]]; then
         echp "da Vao day"
         GIT_WORK_TREE=/home/ubuntu/git-hook 
-        GIT_DIR=home/ubuntu/git-hook./git
+        GIT_DIR=home/ubuntu/git-hook/.git
         export GIT_WORK_TREE GIT_DIR
 
         echo "Updating master branch on VPS..."
