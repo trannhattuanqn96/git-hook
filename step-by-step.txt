@@ -1,37 +1,72 @@
 //https://medium.com/@rishpandey/simplest-auto-deployment-using-git-hooks-4cd6d98e0fc6
 
-- clone project (into local)
+- git config (local)
+    vi ~/.ssh/config
 
-- cd <project>/.git/hooks
+    Host ubuntu@ec2-54-165-234-136.compute-1.amazonaws.com
+    User ubuntu
+    IdentityFile /d/tuan.pem
+    IdentitiesOnly yes
 
-- touch post-receive
+- git config (vps ubuntu)
+    ssh to vps -> sudo su (for root)
+    apt update
+    # cài đặt git
+    apt install git
+    # create folder git config
+    mkdir myproject-git && cd myproject-git
+    # create git 
+    git init --bare
 
--
+- config git remote (local) - (để vừa push lên github, và git của vps)
+    git remote -v
+    # xóa remote 
+    git remote remove origin
+    # add remote origin github
+    git remote add origin git@github.com:myaccount/myproject.git
+    # add remote origin vps
+    git remote set-url --add --push origin ubuntu@ubuntu@ec2-54-165-234-136.compute-1.amazonaws.com:/home/ubuntu/myproject-git
+    # kiểm tra lại 
+    git remote -v (lúc này tại "# add remote origin vps" ghi đè lên lại github )
+    # add remote origin github
+    git remote set-url --add --push origin https://github.com/trannhattuanqn96/git-hook.git
+    # kiểm tra lại
+    git remote -v
+        >> origin  https://github.com/trannhattuanqn96/git-hook.git (fetch)
+        >> origin  ubuntu@ubuntu@ec2-54-165-234-136.compute-1.amazonaws.com:/home/ubuntu/myproject-git (push)
+        >> origin  https://github.com/trannhattuanqn96/git-hook.git (push)
+- create file post-receive (vps)
+    # vaào thư mục git 
+    cd /home/ubuntu/myproject-git/hooks
+    # tạo-ghi file post-receive
+    touch post-receive
+    vi post-receive
 #!/bin/bash
 # Bare repository directory.
 GIT_DIR="/home/ubuntu/myproject-git"
 
 while read oldrev newrev ref; do
-       BRANCH=$(git rev-parse --symbolic --abbrev-ref $ref)
-       if [ $BRANCH == "master" ]; then
-               TARGET="/home/ubuntu/git-hook"
-       elif [ $BRANCH == "staging" ]; then
-               TARGET="/var/www/myproject-staging"
-       else
-               echo "Branch not found. Skipping Deployment."
-       fi
-       # deploy only if var TARGET is set
-       if [ -z ${TARGET} ]; then
-               echo "no target set"
-       else
-               echo "STARTING DEPLOYMENT..."
-               echo "Push to ${BRANCH} received! Deploying branch: ${BRANCH} to: ${TARGET}"
-               # deploy to our target directory.
-               git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f $BRANCH
-       fi
+    BRANCH=$(git rev-parse --symbolic --abbrev-ref $ref)
+    if [ $BRANCH == "master" ]; then
+            TARGET="/home/ubuntu/git-hook"
+    elif [ $BRANCH == "staging" ]; then
+            TARGET="/var/www/myproject-staging"
+    else
+            echo "Branch not found. Skipping Deployment."
+    fi
+    # deploy only if var TARGET is set
+    if [ -z ${TARGET} ]; then
+            echo "no target set"
+    else
+            echo "STARTING DEPLOYMENT..."
+            echo "Push to ${BRANCH} received! Deploying branch: ${BRANCH} to: ${TARGET}"
+            # deploy to our target directory.
+            git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f $BRANCH
+    fi
 done
 
-- chmod +x post-receive
+    # cấp quyền file post-receive
+    chmod +x post-receive
 
-git --work-tree=$TARGET pull
-git --work-tree=$TARGET --git-dir=$GIT_DIR pull $BRANCH
+- Tạo thư mục source (git-hook)
+   mkdir git-hook
