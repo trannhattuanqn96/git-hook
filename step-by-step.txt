@@ -12,10 +12,12 @@ while read oldrev newrev refname
 do
     
     if [[ $refname == "refs/heads/master" ]]; then
-        echp "da Vao day"
+        echo "da Vao day"
         GIT_WORK_TREE=/home/ubuntu/git-hook 
-        GIT_DIR=home/ubuntu/git-hook/.git
+        GIT_DIR=/home/ubuntu/git-hook/.git
         export GIT_WORK_TREE GIT_DIR
+
+        cd $GIT_WORK_TREE
 
         echo "Updating master branch on VPS..."
         git checkout -f master 
