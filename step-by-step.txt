@@ -1,0 +1,31 @@
+- clone project
+
+- cd <project>/.git/hooks
+
+- touch post-receive
+
+-
+#!/bin/bash
+while read oldrev newrev refname
+do
+    // sự kiện trên branch master
+    if [[ $refname == "refs/heads/master" ]]; then
+        GIT_WORK_TREE=/path/to/repository //project
+        GIT_DIR=/path/to/repository.git // folder .git
+        export GIT_WORK_TREE GIT_DIR
+
+        echo "Updating master branch on VPS..."
+        git checkout -f master // checkout master
+        git pull origin master // pull
+
+        //install or update
+        echo "Running npm install..."
+        npm install express
+
+        echo "Running npm install..."
+        npm install -g nodemon
+
+        echo "Starting the server..."
+        nodemon index.js
+    fi
+done
