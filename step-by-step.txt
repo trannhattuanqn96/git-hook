@@ -33,3 +33,5 @@ do
 done
 
 - chmod +x post-receive
+
+git --work-tree=$TARGET pull
