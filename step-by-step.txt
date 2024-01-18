@@ -49,6 +49,8 @@ while read oldrev newrev ref; do
     BRANCH=$(git rev-parse --symbolic --abbrev-ref $ref)
     if [ $BRANCH == "master" ]; then
             TARGET="/home/ubuntu/git-hook"
+    elif [ $BRANCH == "staging" ]; then
+            TARGET="/var/www/myproject-staging"
     else
             echo "Branch not found. Skipping Deployment."
     fi
