@@ -13,7 +13,7 @@
     apt update
     # cài đặt git
     apt install git
-    # create folder git config
+    # create folder git config (chỗ này dùng user ubuntu, user mà trong git config)
     mkdir myproject-git && cd myproject-git
     # create git 
     git init --bare
